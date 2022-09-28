@@ -7,7 +7,7 @@ class sqlDatabase {
   static Future<Database> initDatabase() async{
     final databasePath =  await sql.getDatabasesPath();
   return  sql.openDatabase(path.join(databasePath,'onsite-tracking'),onCreate: (database, version) {
-    return database.execute('CREATE TABLE users(id Text PRIMARY KEY , name Text , email Text, first_time TEXT, idofuser Text)');
+    return database.execute('CREATE TABLE users(id Text PRIMARY KEY , name Text , email Text, first_time TEXT, idofuser Text, roleOfUser Text)');
   },version: 1);
 
 
@@ -40,6 +40,14 @@ print('done');
 
   }
 
+  static Future <String> getUserRole() async{
+
+    Database sql =  await sqlDatabase.initDatabase();
+    final Databasebody = await sql.query('users');
+    return Databasebody[0]['roleOfUser'];
+
+
+  }
 
 
 }

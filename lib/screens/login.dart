@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:onsite_tracking/screens/home.dart';
+import '/screens/home.dart';
 import 'package:provider/provider.dart';
 import '../provider/auth_provider.dart';
 
