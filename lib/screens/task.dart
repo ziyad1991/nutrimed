@@ -115,17 +115,17 @@ try {
 
 
   );
-  location.enableBackgroundMode(enable: true);
-  location.onLocationChanged.listen((LocationData currentLocation) {
-    print('location changed');
-    String hello = currentLocation.latitude.toString();
-    String hello2 = currentLocation.longitude.toString();
-
-    print(hello);
-    print(hello2);
-
-
-  });
+  // location.enableBackgroundMode(enable: true);
+  // location.onLocationChanged.listen((LocationData currentLocation) {
+  //   print('location changed');
+  //   String hello = currentLocation.latitude.toString();
+  //   String hello2 = currentLocation.longitude.toString();
+  //
+  //   print(hello);
+  //   print(hello2);
+  //
+  //
+  // });
   final snackBar = SnackBar(
     content: const Text('Checked In Successfully '),
     action: SnackBarAction(

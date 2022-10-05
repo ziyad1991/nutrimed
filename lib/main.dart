@@ -1,9 +1,12 @@
+import 'package:Nutrimed/provider/contacts_provider.dart';
 import 'package:flutter/material.dart';
 import '/screens/login.dart';
 import '/screens/onboarding.dart';
 import 'package:provider/provider.dart';
 import 'provider/auth_provider.dart';
 import 'provider/visits_provider.dart';
+import 'provider/contacts_provider.dart';
+
 import 'screens/home.dart';
 import 'screens/login.dart';
 import 'screens/onboarding.dart';
@@ -33,6 +36,14 @@ class MyApp extends StatelessWidget {
             ),
         ),
 
+        ChangeNotifierProxyProvider<AuthProvider, ContactsProvider>(
+          create: (_) => ContactsProvider('', []),
+          update: (ctx, auth, previousProductsProvider) =>
+          previousProductsProvider
+            ..updateAuth(
+              auth.userNamec,
+            ),
+        ),
 
 
 

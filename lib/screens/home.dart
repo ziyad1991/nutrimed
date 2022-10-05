@@ -1,3 +1,4 @@
+import 'package:Nutrimed/screens/contacts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,10 @@ class _HomeScreenState extends State<HomeScreen> {
   DateTime now = DateTime.now();
  List<Widget> appPages = [
    TasksScreen(),
-   ArchiveScreen()
+   ContactsScreen(),
+
+   ArchiveScreen(),
+
 
  ] ;
   void getCurrentPageIndex(int index){
@@ -50,6 +54,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Theme.of(context).primaryColor,
                   ),
                   label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.supervised_user_circle,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  label: 'Contacts',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.fingerprint,
