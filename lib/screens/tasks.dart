@@ -117,7 +117,7 @@ class _TasksScreenState extends State<TasksScreen> {
             margin: EdgeInsets.only(right: 5, left: 5),
             decoration: BoxDecoration(
                 color: Colors.white,
-                border: Border.all(color: Colors.red[500], width: 2),
+                border: Border.all(color:  Theme.of(context).primaryColor, width: 2),
                 borderRadius: BorderRadius.all(Radius.circular(20))),
             padding: EdgeInsets.only(right: 5, left: 5),
             child: Column(

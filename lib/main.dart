@@ -1,7 +1,5 @@
 import 'package:Nutrimed/provider/contacts_provider.dart';
 import 'package:flutter/material.dart';
-import '/screens/login.dart';
-import '/screens/onboarding.dart';
 import 'package:provider/provider.dart';
 import 'provider/auth_provider.dart';
 import 'provider/visits_provider.dart';
@@ -64,18 +62,18 @@ class MyApp extends StatelessWidget {
                 ),
               ),
               backgroundColor: Colors.black,
-                primaryColor: Color.fromRGBO(34, 148, 70, 1),
+                primaryColor: Color.fromRGBO(36, 53,112,1 ),
                 buttonColor: Colors.red,
                 inputDecorationTheme: InputDecorationTheme(
                   hintStyle: TextStyle(
-                      color: Color.fromRGBO(34, 148, 70, 1)
+                      color: Color.fromRGBO(36, 53,112,1 )
                   ),
                   focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Color.fromRGBO(34, 148, 70, 1)),
+                    borderSide: BorderSide(color: Color.fromRGBO(36, 53,112,1 )),
                   ),
                 ),
-                appBarTheme: AppBarTheme(color: Color.fromRGBO(34, 148, 70, 1)),
-                buttonTheme: ButtonThemeData(buttonColor: Color.fromRGBO(34, 148, 70, 1)),
+                appBarTheme: AppBarTheme(color: Color.fromRGBO(36, 53,112,1 )),
+                buttonTheme: ButtonThemeData(buttonColor: Color.fromRGBO(36, 53,112,1 )),
                 buttonBarTheme:
                 ButtonBarThemeData(buttonTextTheme: ButtonTextTheme.accent,
 

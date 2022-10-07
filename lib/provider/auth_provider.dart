@@ -50,6 +50,8 @@ class AuthProvider with ChangeNotifier {
     _username = responseBody['name'];
     _userId = responseBody['id'];
     _userRole = responseBody['role'];
+    print('hello moto');
+    print(_userRole);
 
     await sqlDatabase.insertdata('users', {'email': email, 'name': _username,'idofuser' :_userId ,'roleOfUser' :_userRole});
     _dbusername = _username;
@@ -70,10 +72,11 @@ class AuthProvider with ChangeNotifier {
 
     userinfo['userName'] = data;
     userinfo['idofuser'] = dataid;
-    // userinfo['idofuser'] = dataRole;
+    userinfo['role'] = dataRole;
 
     _dbuserid = userinfo['idofuser'];
     _dbusername = userinfo['userName'];
+    _dbUserRole = userinfo['role'];
 
     notifyListeners();
   }

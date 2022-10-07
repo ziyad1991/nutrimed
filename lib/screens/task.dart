@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '/provider/visits_provider.dart';
+import '../provider/visits_provider.dart';
 import 'package:provider/provider.dart';
-import '/models/visit.dart';
+import '../models/visit.dart';
 import 'package:location/location.dart';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
@@ -31,9 +31,8 @@ class _TaskScreenState extends State<TaskScreen> {
   bool checkOutdone = false;
   bool checkIndone = false;
   bool reportdone = false ;
-
   String report;
-   File uploadedImage;
+  File uploadedImage;
 
    bool isLoading = false;
   var loadedVisit = Task(
@@ -115,17 +114,13 @@ try {
 
 
   );
-  // location.enableBackgroundMode(enable: true);
-  // location.onLocationChanged.listen((LocationData currentLocation) {
-  //   print('location changed');
-  //   String hello = currentLocation.latitude.toString();
-  //   String hello2 = currentLocation.longitude.toString();
-  //
-  //   print(hello);
-  //   print(hello2);
-  //
-  //
-  // });
+  location.enableBackgroundMode(enable: true);
+  location.onLocationChanged.listen((LocationData currentLocation) {
+    print('location changed');
+    String hello = currentLocation.latitude.toString();
+    String hello2 = currentLocation.longitude.toString();
+
+  });
   final snackBar = SnackBar(
     content: const Text('Checked In Successfully '),
     action: SnackBarAction(
