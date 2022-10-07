@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import './contacts.dart';
 import 'package:provider/provider.dart';
 import '../provider/auth_provider.dart';
 import 'profile.dart';
@@ -22,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   DateTime now = DateTime.now();
  List<Widget> appPages = [
    TasksScreen(),
+   ContactsScreen(),
    ArchiveScreen()
 
  ] ;
@@ -50,6 +52,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Theme.of(context).primaryColor,
                   ),
                   label: 'Home',
+                ),  BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.contacts,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  label: 'Contacts',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.fingerprint,

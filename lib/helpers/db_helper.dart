@@ -18,7 +18,6 @@ class sqlDatabase {
 
   Database sql = await sqlDatabase.initDatabase();
   sql.insert('users', data,conflictAlgorithm: ConflictAlgorithm.replace);
-print('done');
 
   }
 
