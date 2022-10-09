@@ -1,6 +1,6 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import './add_contact.dart';
 
 
 class ContactsScreen extends StatefulWidget {
@@ -10,29 +10,42 @@ class ContactsScreen extends StatefulWidget {
 }
 void AddContact (ctx){
   showModalBottomSheet(
-      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
+      // isScrollControlled: true,
 
       context: ctx,
   builder: (ctx){
-    return Container(
-      width: double.infinity,
-      color: Colors.white70,
-      child: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: Column(
-          children: [
-            Text('Add Contact',style: TextStyle(
-              fontWeight: FontWeight.bold
-            ),),
-            Form(child: Column(
-              children: [
-                TextFormField()
-              ],
-            ) )
+    return SingleChildScrollView(
+      physics: NeverScrollableScrollPhysics(),
 
-          ],
-        ),
-      ),
+
+            child: Column(
+              children: [
+                Padding(
+
+                  padding: EdgeInsets.only(
+                bottom: MediaQuery.of(ctx).viewInsets.bottom,
+                    left: 30,
+                    right: 30,
+                    top: 20
+
+                  ),
+
+
+
+                  child:
+
+                      Form(child: Column(
+                        children: [
+                          TextFormField(
+                            keyboardAppearance: Brightness.dark,
+                          ),
+                          TextFormField(),TextFormField(),TextFormField(),TextFormField(),TextFormField(),                ],
+                      ) ),
+                ),
+              ],
+            ),
     );
   }
   );
@@ -43,10 +56,16 @@ class _ContactsScreenState extends State<ContactsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       floatingActionButton: FloatingActionButton(
            backgroundColor: Theme.of(context).primaryColor,
            child: IconButton(
-             onPressed: (){AddContact(context);},
+             onPressed: (){
+               Navigator.push(context,MaterialPageRoute(builder: (ctx){
+                 return AddContactScreen();
+               }));
+
+             },
 
              icon: Icon(
 
