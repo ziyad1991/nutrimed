@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.nutrimed">
    <application
+
         android:label="nutrimed"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
@@ -21,6 +22,7 @@
               android:resource="@style/NormalTheme"
               />
             <intent-filter>
+
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
@@ -28,7 +30,13 @@
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
+
             android:name="flutterEmbedding"
+
             android:value="2" />
+
+
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyA1C90CPMUhBHrczXKPpHwvDLyC1RLHUSg"/>
     </application>
 </manifest>

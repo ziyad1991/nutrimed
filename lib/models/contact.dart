@@ -11,6 +11,8 @@ class Contact {
   String Status;
   String Adder;
   DateTime addDate;
+  String details;
+
 
 
 
@@ -25,7 +27,25 @@ class Contact {
   this.Long,
   this.Status,
   this.Adder,
-  DateTime addDate,
+    this.details,
+
+    DateTime addDate,
+  });
+
+
+}
+
+class ContactsType {
+
+  String TypeId;
+  String TypeName;
+
+
+
+
+
+  ContactsType({this.TypeId,
+    this.TypeName,
   });
 
 

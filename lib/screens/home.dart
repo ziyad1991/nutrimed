@@ -4,8 +4,8 @@ import './contacts.dart';
 import 'package:provider/provider.dart';
 import '../provider/auth_provider.dart';
 import 'profile.dart';
-import 'tasks.dart';
 import 'archive.dart';
+import './tasks.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       child: CircleAvatar(
                         backgroundImage: NetworkImage(
-                            'https://preview.keenthemes.com/metronic-v4/theme_rtl/assets/pages/media/profile/profile_user.jpg'),
+                            'https://nutrimed.trottedmedia.com/assets/images/avatars/avatar-7.png'),
                         maxRadius: 32,
                       ),
                     ),

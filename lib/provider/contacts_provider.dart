@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import '../models/contact.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:io';
+
 
 
 class ContactsProvider with ChangeNotifier {
@@ -18,20 +18,29 @@ class ContactsProvider with ChangeNotifier {
 
 
   List _contacts = [];
+  var _contactsType = [];
+
   ContactsProvider(this.userId,this._contacts);
 
   List<Contact> get contacts {
-
     _contacts.sort((a, b){
 
-      return a.status.compareTo(b.status);
+      return b.Status.compareTo(a.Status);
 
       //softing on numerical order (Ascending order by Roll No integer)
     });
     return [..._contacts];
   }
 
+  List<String> get ContactType {
+     return [..._contactsType];
 
+   }
+  List  ContactByStatus(String Status){
+    List filetrdContacts = contacts.where((element) => element.Status == Status).toList();
+    return filetrdContacts;
+
+  }
 
 
   Future<void> getcontacts() async {
@@ -41,9 +50,10 @@ class ContactsProvider with ChangeNotifier {
     try {
       var url =
       Uri.parse(
-          "https://onsitetracking.trottedmedia.com/api/visits.php?method=select&userid=$userId");
+          "https://nutrimed.trottedmedia.com/api/contacts.php?method=select&dataType=contacts&userid=$userId");
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      print (json.decode(response.body));
       final List<Contact> loadedData = [];
       extractedData.forEach((contactId, contactData) {
 
@@ -52,28 +62,82 @@ class ContactsProvider with ChangeNotifier {
             ContactId: contactId,
 
             ContactName: contactData['contact'],
+            Type: contactData['locationType'],
+            Status: contactData['locationStatus'],
+            Address: contactData['contactaddress'],
             Phone: contactData['phone'],
-
-            Address: contactData['address'],
-            Note: contactData['note'],
-            Type: contactData['type'],
             Lat: contactData['lat'],
-            Long: contactData['long'],
-            Status: contactData['status'],
-            Adder: contactData['adder'],
-            addDate: contactData['addDate'],
+            Long: contactData['lng'],
+            details: contactData['details'],
         ));
       });
 
       _contacts = loadedData;
       notifyListeners();
+
     }catch(e) {
 
       print(e);
+
     }
 
 
   }
+ Future<void> AddContact($Name,$Phone,$Address,$Type,$Lat,$Long) async{
+   final url =
+   Uri.parse("https://nutrimed.trottedmedia.com/api/adddata.php");
+
+   final response = await http.post(url,
+       body: json.encode({'name': $Name,
+         'phone': $Phone,
+         'address': $Address,
+         'type': $Type,
+         'lat' : $Lat,
+         'long' : $Long,
+         'agent' : userId
+
+       }));
+
+
+
+ }
+  Future<void> getContactsTypes() async {
+    print('hello contacts type');
+
+
+    try {
+      var url =
+      Uri.parse(
+          "https://nutrimed.trottedmedia.com/api/contacts.php?method=select&dataType=contactsType");
+      final response = await http.get(url);
+      List<dynamic> items = [];
+       items = json.decode(response.body) as List<dynamic>;
+
+
+      _contactsType = items;
+
+      notifyListeners();
+
+      print(_contactsType);
+
+    }catch(e) {
+
+      print(e);
+
+    }
+
+
+  }
+
+
+  Contact  ContactbyId(String id){
+    Contact FilterdContact = contacts.firstWhere((element) => element.ContactId == id);
+    return FilterdContact;
+
+  }
+
+
+
 
   // int getCountByType({String theStatus , DateTime date }) {
   //   if(theStatus == 'ALL'){
@@ -98,14 +162,14 @@ class ContactsProvider with ChangeNotifier {
 
     return Itemscount;
   }
-  String getcontacttype(String theid) {
-
-    Contact filetrdcontacts = contacts.firstWhere((element) => element.ContactId == theid);
-
-    return '1';
-
-
-  }
+  // String getcontacttype(String theid) {
+  //
+  //   Contact filetrdcontacts = contacts.firstWhere((element) => element.ContactId == theid);
+  //
+  //   return '1';
+  //
+  //
+  // }
   List  contactsbyType(String type){
     List filetrdcontacts = contacts.where((element) => element.Status == type).toList();
     return filetrdcontacts;
@@ -113,12 +177,12 @@ class ContactsProvider with ChangeNotifier {
   }
 
 
-  // List  contactsbydate(DateTime date){
-  //   List filetrdcontacts = contacts.where((element) => element.visitDate == date
-  //   ).toList();
-  //   return filetrdcontacts;
-  //
-  // }
+  List  contactsbydate(){
+    List filetrdcontacts = contacts.where((element) => element.ContactId != 0
+    ).toList();
+    return filetrdcontacts;
+
+  }
   // List  contactsByMonth(String date){
   //   List filteredcontacts = contacts.where((element) => element.visitDate.month.toString()
   //

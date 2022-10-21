@@ -1,4 +1,4 @@
-import 'package:Nutrimed/provider/contacts_provider.dart';
+import './provider/contacts_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'provider/auth_provider.dart';
@@ -52,6 +52,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'Flutter Demo',
             theme: ThemeData(
+              // fontFamily: 'Cairo',
               bottomNavigationBarTheme: BottomNavigationBarThemeData(
                 selectedLabelStyle: TextStyle(
                   color: Colors.black87

@@ -7,18 +7,18 @@ import 'dart:io';
 
 
 class VisitsProvider with ChangeNotifier {
-    String userId;
+  String userId;
 
-   void updateAuth ( String uid) {
+  void updateAuth ( String uid) {
 
     this.userId = uid;
     notifyListeners();
 
-   }
+  }
 
 
-   List _tasks = [];
-   VisitsProvider(this.userId,this._tasks);
+  List _tasks = [];
+  VisitsProvider(this.userId,this._tasks);
 
   List<Task> get tasks {
 
@@ -38,43 +38,41 @@ class VisitsProvider with ChangeNotifier {
     print('getting tasks');
 
 
-try {
-  var url =
-  Uri.parse(
-      "https://onsitetracking.trottedmedia.com/api/visits.php?method=select&userid=$userId");
-  final response = await http.get(url);
-  final extractedData = json.decode(response.body) as Map<String, dynamic>;
-  final List<Task> loadedData = [];
-  extractedData.forEach((taskId, taskData) {
+    try {
+      var url =
+      Uri.parse(
+          "https://nutrimed.trottedmedia.com/api/visits.php?method=select&userid=30");
+      final response = await http.get(url);
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      final List<Task> loadedData = [];
+      extractedData.forEach((taskId, taskData) {
 
 
-    loadedData.add(Task(
-        visitId: taskId,
+        loadedData.add(Task(
+            visitId: taskId,
 
-        contactName: taskData['contact'],
-        address: taskData['address'],
-        checkInLat: taskData['checkInLat'],
+            contactName: taskData['contact'],
+            address: taskData['address'],
+            checkInLat: taskData['checkInLat'],
+            checkInLong: taskData['checkInLong'],
+            checkInTime: taskData['intime'],
+            checkoutLong: taskData['checkoutLong'],
+            checkoutLat: taskData['checkoutLat'],
+            checkOutTime: taskData['outtime'],
+            report: taskData['report'],
+            reportdate: taskData['reportdate'],
+            visitDate: DateTime.parse(taskData['visitdate']),
+            status: taskData['visitstatus']));
+      });
 
-        checkInLong: taskData['checkInLong'],
+      _tasks = loadedData;
+      print(loadedData[0].visitDate.month);
+      print('i am here');
+      notifyListeners();
+    }catch(e) {
 
-        checkInTime: taskData['intime'],
-        checkoutLong: taskData['checkoutLong'],
-        checkoutLat: taskData['checkoutLat'],
-        checkOutTime: taskData['outtime'],
-        report: taskData['report'],
-        reportdate: taskData['reportdate'],
-        visitDate: DateTime.parse(taskData['visitdate']),
-        status: taskData['visitstatus']));
-  });
-
-  _tasks = loadedData;
-  print(loadedData[0].visitDate.month);
-  print('i am here');
-  notifyListeners();
-}catch(e) {
-
-  print(e);
-}
+      print(e);
+    }
 
 
   }
@@ -117,25 +115,25 @@ try {
   }
 
 
-    List  tasksbydate(DateTime date){
-      List filetrdTasks = tasks.where((element) => element.visitDate == date
-      ).toList();
-      return filetrdTasks;
+  List  tasksbydate(DateTime date){
+    List filetrdTasks = tasks.where((element) => element.visitDate == date
+    ).toList();
+    return filetrdTasks;
 
-    }
-    List  tasksByMonth(String date){
+  }
+  List  tasksByMonth(String date){
     List filteredTasks = tasks.where((element) => element.visitDate.month.toString()
 
-           ==  date
+        ==  date
 
 
 
 
 
-      ).toList();
-      return filteredTasks;
+    ).toList();
+    return filteredTasks;
 
-    }
+  }
   Task  tasksbyId(String id){
     Task filetrdTasks = tasks.firstWhere((element) => element.visitId == id);
     return filetrdTasks;
@@ -153,7 +151,7 @@ try {
         List<int> imageBytes = uploadedImage.readAsBytesSync();
         String baseimage = base64Encode(imageBytes);
         final url =
-        Uri.parse("https://onsitetracking.trottedmedia.com/api/update.php");
+        Uri.parse("https://nutrimed.trottedmedia.com/api/update.php");
 
         final response = await http.post(url,
             body: json.encode({'type': 'checkIn',
@@ -174,7 +172,7 @@ try {
         notifyListeners();
       } else if (type == 'checkOut') {
         final url =
-        Uri.parse("https://onsitetracking.trottedmedia.com/api/update.php");
+        Uri.parse("https://nutrimed.trottedmedia.com/api/update.php");
 
         final response = await http.post(url,
             body: json.encode({'type': 'checkOut',
@@ -192,8 +190,8 @@ try {
       else {
         print(report);
         final url =
-        Uri.parse("https://onsitetracking.trottedmedia.com/api/update.php");
-print(updatedTask.report);
+        Uri.parse("https://nutrimed.trottedmedia.com/api/update.php");
+        print(updatedTask.report);
         final response = await http.post(url,
             body: json.encode({
               'type': 'report',
